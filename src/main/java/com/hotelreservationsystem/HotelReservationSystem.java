@@ -13,9 +13,9 @@ public class HotelReservationSystem {
 
     public HotelReservationSystem() {
         this.hotelClassList = new ArrayList<HotelClass>();
-        this.addHotel(new HotelClass("Lakewood", 110,90));
-        this.addHotel(new HotelClass("Bridgewood", 150,50));
-        this.addHotel(new HotelClass("Ridgewood", 220,150));
+        this.addHotel(new HotelClass("Lakewood", 110,90, 3));
+        this.addHotel(new HotelClass("Bridgewood", 150,50, 4));
+        this.addHotel(new HotelClass("Ridgewood", 220,150, 5));
     }
 
     public void addHotel(HotelClass hotelClass) {
