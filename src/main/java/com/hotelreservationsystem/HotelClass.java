@@ -37,7 +37,7 @@ public class HotelClass {
         this.regularWeekendRate = regularWeekendRate;
     }
 
-    public long calculateTotalPrice(long days) {
+    public long calculateTotalPrice(long weekDays, long weekEndDays) {
         this.totalRates = weekDays * regularWeekdayRate + weekEndDays * regularWeekendRate;
         return totalRates;
     }
