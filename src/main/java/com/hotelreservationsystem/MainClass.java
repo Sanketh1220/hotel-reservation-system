@@ -8,9 +8,9 @@ public class MainClass {
         System.out.println("Welcome to Hotel Reservation System!");
 
         HotelReservationSystem hotelSystem = new HotelReservationSystem();
-        hotelSystem.addHotel(new HotelClass("Lakewood", 110));
-        hotelSystem.addHotel(new HotelClass("Lakewood", 160));
-        hotelSystem.addHotel(new HotelClass("Lakewood", 220));
+//        hotelSystem.addHotel(new HotelClass("Lakewood", 110));
+//        hotelSystem.addHotel(new HotelClass("Bridgewood", 160));
+//        hotelSystem.addHotel(new HotelClass("Ridgewood", 220));
         System.out.println("Hotels are added!");
 
         boolean repeat = true;
@@ -32,10 +32,10 @@ public class MainClass {
     }
 
     public static void getCheapestHotelForDateRange(Scanner inputScan, HotelReservationSystem hotelSystem) {
-        System.out.println("Enter the Checkin Date (ddMMMyyyy: 13Nov2020)");
+        System.out.println("Enter the Checkin Date (Format : ddMMMyyyy) (Ex: 13Nov2020)");
         String checkinDate = inputScan.nextLine();
 
-        System.out.println("Enter the Checkin Date (ddMMMyyyy: 13Nov2020)");
+        System.out.println("Enter the Checkin Date (Format : ddMMMyyyy) (Ex: 13Nov2020)");
         String checkoutDate = inputScan.nextLine();
 
         System.out.println("From " + checkinDate + " to " + checkoutDate);
