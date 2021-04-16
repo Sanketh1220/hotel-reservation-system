@@ -53,7 +53,7 @@ public class HotelReservationSystem {
         return workDays;
     }
 
-    public HotelClass getCheapestHotel(String checkinDate, String checkoutDate) {
+    public HotelClass getCheapestHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);
             Date checkout = date.parse(checkoutDate);
@@ -61,7 +61,7 @@ public class HotelReservationSystem {
             long weekDays = getWeekDays(checkin, checkout);
             long weekEndDays = days - weekDays;
             return hotelClassList.stream().sorted(Comparator.comparingLong(hotelClass ->
-                    (hotelClass).calculateTotalPrice(weekDays, weekEndDays))).findAny().orElse(null);
+                    (hotelClass).calculateTotalPrice(weekDays, weekEndDays, type))).findAny().orElse(null);
 
         } catch (Exception e) {
             System.out.println("Exception Occured" + e);
@@ -70,7 +70,7 @@ public class HotelReservationSystem {
     }
 
 
-    public HotelClass getCheapestHotelWithRating(String checkinDate, String checkoutDate) {
+    public HotelClass getCheapestBestHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);
             Date checkout = date.parse(checkoutDate);
@@ -82,7 +82,7 @@ public class HotelReservationSystem {
             System.out.println("Week End Days = " + weekEndDays);
             return hotelClassList.stream()
                     .sorted(comparingLong(hotelClass -> ((HotelClass) hotelClass)
-                            .calculateTotalPrice(weekDays, weekEndDays))
+                            .calculateTotalPrice(weekDays, weekEndDays, type))
                             .thenComparing(Comparator.comparingLong(hotelClass ->
                                     -((HotelClass) hotelClass).getRatingForHotel())))
                     .findFirst().orElse(null);
@@ -92,7 +92,7 @@ public class HotelReservationSystem {
         return null;
     }
 
-    public HotelClass getBestRatedHotel(String checkinDate, String checkoutDate) {
+    public HotelClass getBestRatedHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);
             Date checkout = date.parse(checkoutDate);
@@ -100,7 +100,7 @@ public class HotelReservationSystem {
             long weekDays = getWeekDays(checkin, checkout);
             long weekEndDays = days - weekDays;
             for (HotelClass hotelClass : hotelClassList) {
-                hotelClass.calculateTotalPrice(weekDays, weekEndDays);
+                hotelClass.calculateTotalPrice(weekDays, weekEndDays, type);
             }
             return hotelClassList.stream().sorted(Comparator.comparingLong(hotelClass -> -((HotelClass) hotelClass)
                     .getRatingForHotel())).findFirst().orElse(null);

@@ -43,6 +43,23 @@ public class HotelClass {
     public void setRegularWeekendRate(int regularWeekendRate) {
         this.regularWeekendRate = regularWeekendRate;
     }
+
+    public void setRewardWeekdayRate(int rewardWeekdayRate) {
+        this.rewardWeekdayRate = rewardWeekdayRate;
+    }
+
+    public void setRewardWeekendRate(int regularWeekendRate) {
+        this.rewardWeekendRate = regularWeekendRate;
+    }
+
+    public int getRewardWeekdayRate() {
+        return rewardWeekdayRate;
+    }
+
+    public int getRewardWeekendRate() {
+        return rewardWeekendRate;
+    }
+
     public int getRatingForHotel() {
         return ratingForHotel;
     }
@@ -51,11 +68,15 @@ public class HotelClass {
         this.ratingForHotel = ratingForHotel;
     }
 
-    public long calculateTotalPrice(long weekDays, long weekEndDays) {
-        this.totalRates = weekDays * regularWeekdayRate + weekEndDays * regularWeekendRate;
-        return totalRates;
+    public long calculateTotalPrice(long weekDays, long weekEndDays, String type) {
+        if (type.equalsIgnoreCase("reward")) {
+            this.totalRates = weekDays * rewardWeekdayRate + weekEndDays * rewardWeekendRate;
+            return totalRates;
+        }else {
+            this.totalRates = weekDays * regularWeekdayRate + weekEndDays * regularWeekendRate;
+            return totalRates;
+        }
     }
-
     public String toString() {
         return hotelName + " rated : " + ratingForHotel  + ", Total price is $" + totalRates;
     }
