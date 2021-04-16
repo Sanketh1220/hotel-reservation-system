@@ -78,6 +78,6 @@ public class HotelClass {
         }
     }
     public String toString() {
-        return hotelName + " rated : " + ratingForHotel  + ", Total price is $" + totalRates;
+        return hotelName + ", rated : " + ratingForHotel  + ", Total price is $" + totalRates;
     }
 }
