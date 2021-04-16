@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
+import static java.util.Comparator.*;
+
 public class HotelReservationSystem {
     private SimpleDateFormat date = new SimpleDateFormat("ddMMMyyyy");
     private ArrayList<HotelClass> hotelClassList = new ArrayList<>();
@@ -24,7 +26,7 @@ public class HotelReservationSystem {
 
     public int getWeekDays(Date startDate, Date endDate) {
         Calendar startCal = Calendar.getInstance();
-        startCal.setTime(endDate);
+        startCal.setTime(startDate);
 
         Calendar endCal = Calendar.getInstance();
         endCal.setTime(endDate);
@@ -56,8 +58,10 @@ public class HotelReservationSystem {
             System.out.println("Days = " + days);
             System.out.println("Week Days = " + weekDays);
             System.out.println("Week End Days = " + weekEndDays);
-            return hotelClassList.stream().sorted(Comparator.comparingLong(hotelClass ->
-                    (hotelClass).calculateTotalPrice(weekDays, weekEndDays))).findAny().orElse(null);
+            return hotelClassList.stream()
+                    .sorted(comparingLong(hotelClass -> ((HotelClass) hotelClass).calculateTotalPrice(weekDays, weekEndDays))
+                            .thenComparing(Comparator.comparingLong(hotelClass -> -((HotelClass) hotelClass).getRatingForHotel())))
+                    .findFirst().orElse(null);
         } catch (ParseException e) {
             System.out.println("Exception Occured is " + e);
         }
