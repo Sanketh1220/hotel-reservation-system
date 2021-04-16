@@ -13,6 +13,7 @@ public class HotelReservationSystem {
     private SimpleDateFormat date = new SimpleDateFormat("ddMMMyyyy");
     private ArrayList<HotelClass> hotelClassList = new ArrayList<>();
 
+    //added all elements to array list
     public HotelReservationSystem() {
         this.hotelClassList = new ArrayList<HotelClass>();
         this.addHotel(new HotelClass("Lakewood", 110,90,
@@ -27,6 +28,7 @@ public class HotelReservationSystem {
         hotelClassList.add(hotelClass);
     }
 
+    //getting week days
     public int getWeekDays(Date startDate, Date endDate) {
         Calendar startCal = Calendar.getInstance();
         startCal.setTime(startDate);
@@ -53,6 +55,7 @@ public class HotelReservationSystem {
         return workDays;
     }
 
+    //getting the cheapest hotel
     public HotelClass getCheapestHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);
@@ -69,7 +72,7 @@ public class HotelReservationSystem {
         }
     }
 
-
+    //getting cheapest best rated hotel
     public HotelClass getCheapestBestHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);
@@ -92,6 +95,7 @@ public class HotelReservationSystem {
         return null;
     }
 
+    //getting best rated hotel
     public HotelClass getBestRatedHotel(String checkinDate, String checkoutDate, String type) {
         try {
             Date checkin = date.parse(checkinDate);

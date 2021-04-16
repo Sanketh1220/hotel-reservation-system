@@ -23,6 +23,7 @@ public class MainClass {
                     "3. Get best rated hotel for date range\n4.Exit");
             int option = Integer.parseInt(inputScan.nextLine());
 
+            //switch case for choosing which to get
             switch (option) {
                 case 1:
                     getCheapestHotelForDateRange(inputScan, hotelSystem);
@@ -42,6 +43,7 @@ public class MainClass {
         }
     }
 
+    //taking inputs from user to get respective methods
     public static void getCheapestHotelForDateRange(Scanner inputScan, HotelReservationSystem hotelSystem) {
         System.out.println("Enter the Checkin Date (Format : ddMMMyyyy) (Ex: 13Nov2020)");
         String checkinDate = inputScan.nextLine();

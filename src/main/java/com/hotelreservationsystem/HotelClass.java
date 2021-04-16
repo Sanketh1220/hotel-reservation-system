@@ -1,6 +1,9 @@
 package com.hotelreservationsystem;
 
+//creating a POJO
 public class HotelClass {
+
+    //declared variables
     private String hotelName;
     private int regularCustRate;
     private int regularWeekdayRate;
@@ -10,6 +13,7 @@ public class HotelClass {
     private int rewardWeekdayRate;
     private int rewardWeekendRate;
 
+    //constructor for Hotel Class
     public HotelClass(String hotelName, int regularWeekdayRate, int regularWeekendRate, int rewardWeekdayRate,
                       int rewardWeekendRate, int ratingForHotel) {
         this.hotelName = hotelName;
@@ -20,6 +24,7 @@ public class HotelClass {
         this.ratingForHotel = ratingForHotel;
     }
 
+    //setting and getting methods
     public String getHotelName() {
         return hotelName;
     }
@@ -68,6 +73,7 @@ public class HotelClass {
         this.ratingForHotel = ratingForHotel;
     }
 
+    //calculation for total rate
     public long calculateTotalPrice(long weekDays, long weekEndDays, String type) {
         if (type.equalsIgnoreCase("reward")) {
             this.totalRates = weekDays * rewardWeekdayRate + weekEndDays * rewardWeekendRate;
@@ -77,6 +83,8 @@ public class HotelClass {
             return totalRates;
         }
     }
+
+    //method to display output
     public String toString() {
         return hotelName + ", rated : " + ratingForHotel  + ", Total price is $" + totalRates;
     }
