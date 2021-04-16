@@ -40,7 +40,7 @@ public class MainClass {
 
         System.out.println("From " + checkinDate + " to " + checkoutDate);
 
-        HotelClass cheapestHotel = hotelSystem.getCheapestHotel(checkinDate, checkoutDate);
+        HotelClass cheapestHotel = hotelSystem.getBestRatedHotel(checkinDate, checkoutDate);
         System.out.println("Cheapest hotel for the date range is: " + cheapestHotel);
     }
 }

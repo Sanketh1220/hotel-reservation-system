@@ -32,7 +32,8 @@ public class HotelReservationSystem {
         endCal.setTime(endDate);
 
         int workDays = 0;
-        if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK )!= Calendar.SUNDAY) {
+        if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY &&
+                startCal.get(Calendar.DAY_OF_WEEK )!= Calendar.SUNDAY) {
             ++workDays;
         }
         if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
@@ -41,7 +42,8 @@ public class HotelReservationSystem {
         }
         do {
             startCal.add(Calendar.DAY_OF_MONTH, 1);
-            if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+            if(startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY &&
+                    startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
                 ++workDays;
             }
         }while(startCal.getTimeInMillis() <= endCal.getTimeInMillis());
@@ -52,6 +54,23 @@ public class HotelReservationSystem {
         try {
             Date checkin = date.parse(checkinDate);
             Date checkout = date.parse(checkoutDate);
+            long days = (long) ((checkout.getTime() - checkin.getTime()) / (86.4e6)) + 1;
+            long weekDays = getWeekDays(checkin, checkout);
+            long weekEndDays = days - weekDays;
+            return hotelClassList.stream().sorted(Comparator.comparingLong(hotelClass ->
+                    (hotelClass).calculateTotalPrice(weekDays, weekEndDays))).findAny().orElse(null);
+
+        } catch (Exception e) {
+            System.out.println("Exception Occured" + e);
+            return null;
+        }
+    }
+
+
+    public HotelClass getCheapestHotelWithRating(String checkinDate, String checkoutDate) {
+        try {
+            Date checkin = date.parse(checkinDate);
+            Date checkout = date.parse(checkoutDate);
             long days = (long) ((checkout.getTime() - checkin.getTime()) / (86.4e6)) +1;
             long weekDays = getWeekDays(checkin, checkout);
             long weekEndDays = days - weekDays;
@@ -59,11 +78,31 @@ public class HotelReservationSystem {
             System.out.println("Week Days = " + weekDays);
             System.out.println("Week End Days = " + weekEndDays);
             return hotelClassList.stream()
-                    .sorted(comparingLong(hotelClass -> ((HotelClass) hotelClass).calculateTotalPrice(weekDays, weekEndDays))
-                            .thenComparing(Comparator.comparingLong(hotelClass -> -((HotelClass) hotelClass).getRatingForHotel())))
+                    .sorted(comparingLong(hotelClass -> ((HotelClass) hotelClass)
+                            .calculateTotalPrice(weekDays, weekEndDays))
+                            .thenComparing(Comparator.comparingLong(hotelClass ->
+                                    -((HotelClass) hotelClass).getRatingForHotel())))
                     .findFirst().orElse(null);
         } catch (ParseException e) {
-            System.out.println("Exception Occured is " + e);
+            System.out.println("Exception Occured here is " + e);
+        }
+        return null;
+    }
+
+    public HotelClass getBestRatedHotel(String checkinDate, String checkoutDate) {
+        try {
+            Date checkin = date.parse(checkinDate);
+            Date checkout = date.parse(checkoutDate);
+            long days = (long) ((checkout.getTime() - checkin.getTime()) / (86.4e6)) +1;
+            long weekDays = getWeekDays(checkin, checkout);
+            long weekEndDays = days - weekDays;
+            for (HotelClass hotelClass : hotelClassList) {
+                hotelClass.calculateTotalPrice(weekDays, weekEndDays);
+            }
+            return hotelClassList.stream().sorted(Comparator.comparingLong(hotelClass -> -((HotelClass) hotelClass)
+                    .getRatingForHotel())).findFirst().orElse(null);
+        } catch (Exception e) {
+            System.out.println("Exception Occured here is " + e);
         }
         return null;
     }
