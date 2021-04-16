@@ -7,11 +7,16 @@ public class HotelClass {
     private int regularWeekendRate;
     private long totalRates;
     private int ratingForHotel;
+    private int rewardWeekdayRate;
+    private int rewardWeekendRate;
 
-    public HotelClass(String hotelName, int regularWeekdayRate, int regularWeekendRate, int ratingForHotel) {
+    public HotelClass(String hotelName, int regularWeekdayRate, int regularWeekendRate, int rewardWeekdayRate,
+                      int rewardWeekendRate, int ratingForHotel) {
         this.hotelName = hotelName;
         this.regularWeekdayRate = regularWeekdayRate;
         this.regularWeekendRate = regularWeekendRate;
+        this.rewardWeekdayRate = regularWeekdayRate;
+        this.rewardWeekendRate = regularWeekendRate;
         this.ratingForHotel = ratingForHotel;
     }
 
