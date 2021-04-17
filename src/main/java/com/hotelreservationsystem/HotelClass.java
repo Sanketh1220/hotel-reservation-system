@@ -7,10 +7,11 @@ public class HotelClass {
     private int regularWeekendRate;
     private long totalRates;
 
-    public HotelClass(String hotelName, int regularWeekdayRate, int regularWeekendRate) {
+    public HotelClass(String hotelName, int regularCustRate) {
         this.hotelName = hotelName;
-        this.regularWeekdayRate = regularWeekdayRate;
-        this.regularWeekendRate = regularWeekendRate;
+        this.regularCustRate = regularCustRate;
+//        this.regularWeekdayRate = regularWeekdayRate;
+//        this.regularWeekendRate = regularWeekendRate;
     }
 
     public String getHotelName() {
@@ -38,11 +39,12 @@ public class HotelClass {
     }
 
     public long calculateTotalPrice(long days) {
-        this.totalRates = weekDays * regularWeekdayRate + weekEndDays * regularWeekendRate;
+        this.totalRates = regularCustRate * days;
+//                + weekEndDays * regularWeekendRate;
         return totalRates;
     }
 
     public String toString() {
-        return hotelName + ",Total price is $" + totalRates;
+        return hotelName + ", Total Rates: $" + totalRates;
     }
 }
